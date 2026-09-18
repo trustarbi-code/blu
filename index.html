@@ -681,55 +681,68 @@ footer .sub{max-width:60ch;}
 </style>
 
 
-<style id="mobile-xform-fix">
-/* Final mobile fix: Before → After blocks must stack in one column */
-@media (max-width:760px){
+<style id="mobile-xform-fix-v2">
+/* Before → After: mobile-first layout */
+.xform{
+  display:grid !important;
+  grid-template-columns:minmax(0,1fr) !important;
+  grid-template-rows:auto auto auto;
+  width:100% !important;
+  max-width:100% !important;
+  min-width:0 !important;
+  gap:0 !important;
+  margin-left:0;
+  margin-right:0;
+}
+
+.xcell{
+  width:100%;
+  min-width:0 !important;
+  max-width:100%;
+  box-sizing:border-box;
+}
+
+.xcell .xt{
+  min-width:0;
+  max-width:100%;
+  overflow-wrap:anywhere;
+  word-break:keep-all;
+}
+
+.xarrow{
+  width:100%;
+  min-width:0;
+  min-height:42px;
+  display:flex;
+  align-items:center;
+  justify-content:center;
+  padding:8px 0 !important;
+  transform:rotate(90deg);
+  box-sizing:border-box;
+}
+
+.xcell.before{
+  border-right:1px solid var(--line);
+  border-bottom:0;
+}
+
+.xcell.after{
+  border-top:0;
+}
+
+/* Desktop/tablet: restore horizontal Before → After layout */
+@media (min-width:761px){
   .xform{
-    display:grid !important;
-    grid-template-columns:minmax(0,1fr) !important;
-    grid-template-rows:auto auto auto;
-    width:100% !important;
-    max-width:100% !important;
-    min-width:0 !important;
-    gap:0 !important;
-    margin-left:0;
-    margin-right:0;
-  }
-
-  .xcell{
-    display:flex;
-    width:100%;
-    min-width:0 !important;
-    max-width:100%;
-    box-sizing:border-box;
-  }
-
-  .xcell .xt{
-    min-width:0;
-    max-width:100%;
-    overflow-wrap:anywhere;
-    word-break:keep-all;
+    grid-template-columns:minmax(0,1fr) auto minmax(0,1fr) !important;
+    grid-template-rows:none;
+    gap:clamp(12px,2.5vw,26px) !important;
   }
 
   .xarrow{
-    width:100%;
-    min-width:0;
-    min-height:42px;
-    display:flex;
-    align-items:center;
-    justify-content:center;
-    padding:8px 0 !important;
-    transform:rotate(90deg);
-    box-sizing:border-box;
-  }
-
-  .xcell.before{
-    border-right:1px solid var(--line);
-    border-bottom:0;
-  }
-
-  .xcell.after{
-    border-top:0;
+    width:auto;
+    min-height:0;
+    padding:2px 0 !important;
+    transform:none;
   }
 }
 </style>
