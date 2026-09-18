@@ -562,6 +562,124 @@ footer .sub{max-width:60ch;}
 }
 </style>
 
+
+<style id="project-result-card-repair">
+/* PROJECT RESULT CARDS — structural repair */
+.act .res-tiles,
+.act .result-grid,
+.act .results-grid,
+.act .cards,
+.act .card-grid{
+  display:grid;
+  width:100%;
+  gap:0;
+  align-items:stretch;
+}
+.act .res-tiles{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  border-top:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+}
+.act .res-tiles .rt,
+.act .result-grid > *,
+.act .results-grid > *,
+.act .cards > *,
+.act .card-grid > *{
+  min-width:0;
+  max-width:none;
+  width:100%;
+  margin:0;
+  overflow:hidden;
+}
+
+/* Four cards: give each card a clean editorial column */
+.act .res-tiles .rt{
+  display:flex;
+  flex-direction:column;
+  justify-content:flex-start;
+  min-height:170px;
+  padding:24px 22px 26px;
+  background:transparent;
+  border:0;
+  border-right:1px solid var(--line);
+  border-radius:0;
+  box-shadow:none;
+}
+.act .res-tiles .rt:last-child{border-right:0;}
+.act .res-tiles .rt .rt-no,
+.act .res-tiles .rt .no{
+  display:block;
+  margin-bottom:18px;
+  font-size:.66rem;
+  line-height:1;
+  letter-spacing:.14em;
+  font-weight:700;
+  color:var(--accent);
+}
+.act .res-tiles .rt .rt-title,
+.act .res-tiles .rt .title,
+.act .res-tiles .rt h4,
+.act .res-tiles .rt h3{
+  display:block;
+  margin:0 0 10px;
+  color:var(--ink);
+  font-size:clamp(.92rem,1.15vw,1.08rem);
+  line-height:1.35;
+  letter-spacing:-.025em;
+  overflow-wrap:anywhere;
+}
+.act .res-tiles .rt .rt-copy,
+.act .res-tiles .rt .copy,
+.act .res-tiles .rt p{
+  margin:0;
+  color:var(--muted);
+  font-size:.78rem;
+  line-height:1.65;
+  overflow-wrap:anywhere;
+}
+
+/* If the existing cards use generic divs, keep their contents inside the column */
+.act .res-tiles .rt > *{max-width:100%;}
+.act .res-tiles .rt img{display:block;width:100%;height:auto;object-fit:cover;}
+
+/* Don't let the result strip inherit decorative transforms */
+.act .res-tiles .rt:hover{
+  transform:none;
+  box-shadow:none;
+}
+.act .res-tiles .rt::before,
+.act .res-tiles .rt::after{
+  display:none;
+}
+
+/* Tablet */
+@media (max-width:900px){
+  .act .res-tiles{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .act .res-tiles .rt:nth-child(2){border-right:0;}
+  .act .res-tiles .rt:nth-child(-n+2){border-bottom:1px solid var(--line);}
+}
+
+/* Mobile */
+@media (max-width:760px){
+  .act .res-tiles{
+    grid-template-columns:1fr;
+  }
+  .act .res-tiles .rt,
+  .act .res-tiles .rt:nth-child(-n+2){
+    border-right:0;
+    border-bottom:1px solid var(--line);
+    min-height:0;
+    padding:22px 0;
+  }
+  .act .res-tiles .rt:last-child{border-bottom:0;}
+}
+
+/* Dark mode */
+[data-theme="dark"] .act .res-tiles .rt{
+  background:transparent;
+}
+</style>
+
 </head>
 <body>
 <script>try{if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
