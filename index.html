@@ -390,6 +390,178 @@ footer{background:var(--bg);border-top:1px solid var(--line)}footer::before{back
 </style>
 
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Archivo:wght@500;700;900&family=Gothic+A1:wght@400;500;700;900&family=IBM+Plex+Mono:wght@400;500&display=swap">
+
+<style id="final-layout-and-color-fixes">
+/* =========================================================
+   FINAL PASS — layout stability + refined palette
+   ========================================================= */
+:root{
+  --bg:#f7f5ef;
+  --bg-2:#ece9e0;
+  --surface:#fcfbf8;
+  --surface-2:#e3e0d6;
+  --ink:#172126;
+  --ink-soft:#46535a;
+  --muted:#6f797d;
+  --faint:#a5aba9;
+  --line:#d5d9d5;
+  --line-strong:#aeb7b4;
+  --accent:#14736f;
+  --accent-2:#d0a24c;
+  --accent-deep:#0d5b58;
+  --accent-soft:rgba(20,115,111,.09);
+  --accent-line:rgba(20,115,111,.30);
+  --shadow-sm:0 1px 0 rgba(23,33,38,.035),0 14px 36px rgba(23,33,38,.055);
+  --grad:linear-gradient(135deg,var(--accent-deep),var(--accent));
+  --accent-glow:rgba(20,115,111,.10);
+}
+[data-theme="dark"]{
+  --bg:#11191b;
+  --bg-2:#192224;
+  --surface:#172023;
+  --surface-2:#202b2d;
+  --ink:#edf2ef;
+  --ink-soft:#c2ceca;
+  --muted:#91a09d;
+  --faint:#5f6d6b;
+  --line:#303b3d;
+  --line-strong:#526062;
+  --accent:#55bdb6;
+  --accent-2:#e0b963;
+  --accent-deep:#31958f;
+  --accent-soft:rgba(85,189,182,.12);
+  --accent-line:rgba(85,189,182,.34);
+  --shadow-sm:0 1px 0 rgba(0,0,0,.22),0 16px 40px rgba(0,0,0,.22);
+  --grad:linear-gradient(135deg,var(--accent-deep),var(--accent));
+  --accent-glow:rgba(85,189,182,.12);
+}
+
+/* Prevent common overflow / broken-grid cases */
+html{overflow-x:hidden;scroll-behavior:smooth;}
+body{overflow-x:hidden;background:var(--bg);color:var(--ink);}
+*,*::before,*::after{box-sizing:border-box;}
+img,svg,video{max-width:100%;height:auto;}
+p,h1,h2,h3,h4,blockquote{overflow-wrap:anywhere;}
+.wrap{width:min(100%,1120px);margin-inline:auto;}
+.act,.metric,.fb,.flow-item,.xcell{min-width:0;}
+
+/* Navigation: stable at tablet/mobile widths */
+nav.topbar .inner{width:min(100%,1120px);min-width:0;}
+nav.topbar .brand{flex:0 0 auto;}
+nav.topbar .links{min-width:0;max-width:100%;}
+
+/* Hero: don't let oversized typography force horizontal overflow */
+header.hero h1{max-width:100%;text-wrap:balance;}
+header.hero .lede{max-width:700px;}
+
+/* Metrics: equal columns, stable content heights */
+.metric-row{width:100%;grid-template-columns:repeat(4,minmax(0,1fr));}
+.metric{min-width:0;}
+.metric .val{white-space:normal;overflow-wrap:anywhere;}
+.metric .lab,.metric .sub{overflow-wrap:anywhere;}
+
+/* About */
+.about-grid{width:100%;grid-template-columns:minmax(0,260px) minmax(0,1fr);}
+.about-photo{width:100%;}
+.about-body{min-width:0;}
+
+/* Work sections */
+.act-top{min-width:0;}
+.act-code{min-width:0;flex:1 1 55%;}
+.act-code .kicker{overflow-wrap:anywhere;}
+.act-meta{flex:0 1 auto;min-width:0;}
+.act-title{max-width:26ch;text-wrap:balance;}
+.act-role{max-width:760px;}
+.act-hero-stat{width:100%;min-width:0;}
+.act-hero-stat .big{flex:0 0 auto;max-width:100%;}
+.act-hero-stat .stat-cap{min-width:0;max-width:620px;flex:1 1 300px;}
+.act-hero-stat .stat-tag{max-width:100%;}
+.xform{width:100%;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);}
+.xcell{min-width:0;}
+.xcell .xt{overflow-wrap:anywhere;}
+.xarrow{flex:0 0 auto;}
+.res-tiles{grid-template-columns:repeat(4,minmax(0,1fr));}
+.res-tiles .rt{min-width:0;}
+.evidence,.asset-hl{min-width:0;}
+.shot img{display:block;width:100%;}
+
+/* Feedback */
+.fb-grid{grid-template-columns:repeat(2,minmax(0,1fr));}
+.fb{min-width:0;}
+.fb blockquote{overflow-wrap:anywhere;}
+
+/* How I work */
+.work-flow{grid-template-columns:repeat(4,minmax(0,1fr));}
+.flow-item{min-width:0;}
+.flow-item p{overflow-wrap:anywhere;}
+
+/* Footer */
+footer .wrap{min-width:0;}
+footer h2{max-width:18ch;text-wrap:balance;}
+footer .sub{max-width:60ch;}
+
+/* Tablet */
+@media (max-width:900px){
+  .metric-row{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .res-tiles{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .work-flow{grid-template-columns:repeat(2,minmax(0,1fr));}
+  .act-top{align-items:flex-start;}
+  .act-meta{font-size:.72rem;}
+}
+
+/* Mobile */
+@media (max-width:760px){
+  nav.topbar .inner{height:auto;min-height:62px;padding-top:12px;padding-bottom:12px;align-items:center;}
+  nav.topbar .links{gap:14px;overflow-x:auto;padding-bottom:2px;}
+  header.hero{padding-top:76px;}
+  header.hero h1{font-size:clamp(2.65rem,11.5vw,4.8rem);line-height:1.05;letter-spacing:-.055em;}
+  header.hero .lede{font-size:1rem;line-height:1.7;}
+  .metric-row{grid-template-columns:1fr;}
+  .metric,.metric:nth-child(2),.metric:nth-child(3),.metric:nth-child(4){
+    border-left:0;
+    border-top:0;
+    padding-left:0;
+    padding-right:0;
+    min-height:0;
+  }
+  .metric + .metric{border-top:1px solid var(--line);}
+  .metric .val{font-size:clamp(3.4rem,17vw,5.4rem);}
+  .metric .val.word{font-size:clamp(2rem,9vw,3rem);}
+  .about-grid{grid-template-columns:1fr;gap:32px;}
+  .about-photo{max-width:190px;}
+  .act-top{display:block;}
+  .act-code{display:flex;margin-bottom:12px;}
+  .act-meta{text-align:left;}
+  .act-title{max-width:none;font-size:clamp(2rem,9vw,3.1rem);}
+  .act-hero-stat{display:block;}
+  .act-hero-stat .big{margin-bottom:20px;}
+  .act-hero-stat .stat-cap{max-width:none;}
+  .xform{grid-template-columns:1fr;gap:0;}
+  .xcell.before{border-right:1px solid var(--line);border-bottom:0;}
+  .xarrow{min-height:42px;padding:8px 0;transform:rotate(90deg);}
+  .xcell.after{border-top:0;}
+  .res-tiles{grid-template-columns:1fr;}
+  .fb-grid{grid-template-columns:1fr;}
+  .fb,.fb:nth-child(even){padding-left:0;border-left:0;}
+  .work-flow{grid-template-columns:1fr;}
+  .flow-item,.flow-item:not(:first-child){padding-left:0;padding-right:0;border-left:0;min-height:0;}
+  .flow-item + .flow-item{border-top:1px solid #4a5758;}
+  footer h2{max-width:none;}
+}
+
+/* Very narrow phones */
+@media (max-width:420px){
+  nav.topbar .brand{font-size:.64rem;}
+  nav.topbar .links{font-size:.62rem;gap:11px;}
+  .wrap{padding-inline:18px;}
+  nav.topbar .inner{padding-inline:18px;}
+  .act-code .no{font-size:3rem;}
+  .act-code .kicker{font-size:.64rem;}
+  .act-hero-stat .big{font-size:clamp(4.2rem,20vw,6.5rem);}
+  .act-hero-stat .big.word{font-size:clamp(2.2rem,11vw,3.4rem);}
+}
+</style>
+
 </head>
 <body>
 <script>try{if(localStorage.getItem('theme')==='dark')document.documentElement.setAttribute('data-theme','dark');}catch(e){}</script>
