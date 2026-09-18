@@ -8,21 +8,22 @@
 <title>오은비 · 먼저 움직이는 사람</title>
 <style>
   :root{
-    --bg:#0a0d15;
-    --bg-2:#0d111b;
-    --surface:#131824;
-    --surface-2:#1a2130;
-    --ink:#f1f3f8;
-    --ink-soft:#c4cad8;
-    --muted:#7f8899;
-    --faint:#525b6c;
-    --line:#212939;
-    --line-strong:#303a4d;
-    --accent:#f2a72e;
-    --accent-2:#ffc978;
-    --accent-deep:#b97c14;
-    --accent-soft:rgba(242,167,46,.12);
-    --accent-line:rgba(242,167,46,.32);
+    --bg:#ffffff;
+    --bg-2:#f4f6f9;
+    --surface:#ffffff;
+    --surface-2:#eef1f6;
+    --ink:#171a21;
+    --ink-soft:#454b57;
+    --muted:#6b7280;
+    --faint:#aab0bc;
+    --line:#e6e8ee;
+    --line-strong:#d5d9e1;
+    --accent:#d97706;
+    --accent-2:#f2a72e;
+    --accent-deep:#b45a09;
+    --accent-soft:rgba(217,119,6,.10);
+    --accent-line:rgba(217,119,6,.28);
+    --shadow-sm:0 1px 2px rgba(16,24,40,.04),0 4px 14px rgba(16,24,40,.05);
     --radius:8px;
     --radius-lg:16px;
     --kr:"Gothic A1","Noto Sans KR",-apple-system,BlinkMacSystemFont,sans-serif;
@@ -69,7 +70,7 @@
 
   /* HERO */
   header.hero{position:relative;overflow:hidden;padding-block:clamp(64px,12vw,132px) clamp(48px,8vw,84px);}
-  header.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 18% 8%,var(--accent-soft),transparent 55%),radial-gradient(90% 70% at 100% 100%,rgba(60,90,180,.10),transparent 60%);pointer-events:none;}
+  header.hero::before{content:"";position:absolute;inset:0;background:radial-gradient(120% 90% at 18% 8%,var(--accent-soft),transparent 55%),radial-gradient(90% 70% at 100% 100%,rgba(59,110,230,.07),transparent 60%);pointer-events:none;}
   header.hero .wrap{position:relative;display:flex;flex-direction:column;gap:26px;}
   header.hero h1{font-size:clamp(2.4rem,8vw,5.2rem);letter-spacing:-.01em;}
   header.hero h1 .hl{color:var(--accent);}
@@ -91,8 +92,8 @@
   .metrics .head{display:flex;flex-direction:column;gap:8px;margin-bottom:clamp(28px,4vw,40px);}
   .metrics .head h2{font-size:clamp(1.3rem,3vw,1.7rem);}
   .metrics .head p{color:var(--muted);font-size:.95rem;}
-  .metric-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;}
-  .metric{background:var(--bg-2);padding:22px clamp(14px,2vw,22px);display:flex;flex-direction:column;gap:6px;}
+  .metric-row{display:grid;grid-template-columns:repeat(4,1fr);gap:1px;background:var(--line);border:1px solid var(--line);border-radius:var(--radius);overflow:hidden;box-shadow:var(--shadow-sm);}
+  .metric{background:var(--surface);padding:22px clamp(14px,2vw,22px);display:flex;flex-direction:column;gap:6px;}
   .metric .val{font-family:var(--num);font-weight:900;font-size:clamp(2.4rem,6vw,3.6rem);line-height:.95;color:var(--accent);letter-spacing:-.02em;}
   .metric .val.word{font-family:var(--kr);font-size:clamp(1.7rem,4.4vw,2.5rem);letter-spacing:-.01em;}
   .metric .val .u{font-size:.42em;color:var(--ink-soft);margin-left:3px;font-weight:700;}
@@ -114,8 +115,8 @@
   #about{background:var(--bg);}
   .about-grid{display:grid;grid-template-columns:200px 1fr;gap:clamp(24px,5vw,52px);align-items:start;}
   .about-photo{position:relative;border-radius:var(--radius-lg);overflow:hidden;border:1px solid var(--line-strong);}
-  .about-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center top;filter:grayscale(.2) contrast(1.02);}
-  .about-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 55%,rgba(10,13,21,.5));}
+  .about-photo img{width:100%;aspect-ratio:4/5;object-fit:cover;object-position:center top;filter:contrast(1.02);}
+  .about-photo::after{content:"";position:absolute;inset:0;background:linear-gradient(180deg,transparent 62%,rgba(23,26,33,.16));}
   .about-body .name{font-size:1.8rem;font-weight:900;}
   .about-body .edu{font-family:var(--mono);font-size:.82rem;color:var(--muted);margin-top:4px;}
   .about-body .bio{margin-top:20px;font-size:1.05rem;line-height:1.8;color:var(--ink-soft);text-wrap:pretty;}
@@ -186,7 +187,7 @@
 
   /* evidence */
   .evidence{margin-top:clamp(26px,4vw,38px);}
-  .shot{border-radius:var(--radius);border:1px solid var(--line-strong);overflow:hidden;background:var(--surface);}
+  .shot{border-radius:var(--radius);border:1px solid var(--line-strong);overflow:hidden;background:var(--surface);box-shadow:var(--shadow-sm);}
   .shot img{width:100%;}
   .cap-txt{font-family:var(--mono);font-size:.72rem;color:var(--muted);margin-top:9px;line-height:1.5;}
   .shot-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:16px;}
@@ -241,7 +242,7 @@
   /* FEEDBACK */
   #feedback{background:var(--bg);}
   .fb-grid{display:grid;grid-template-columns:repeat(2,1fr);gap:clamp(16px,3vw,28px);}
-  .fb{display:flex;flex-direction:column;gap:14px;padding:clamp(20px,3vw,28px);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);}
+  .fb{display:flex;flex-direction:column;gap:14px;padding:clamp(20px,3vw,28px);background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);box-shadow:var(--shadow-sm);}
   .fb .qt{font-family:var(--num);font-weight:900;font-size:2rem;color:var(--accent-line);line-height:.6;height:.5em;}
   .fb blockquote{margin:0;font-size:1.02rem;line-height:1.68;color:var(--ink);font-weight:500;}
   .fb .who{display:flex;align-items:center;gap:10px;font-family:var(--mono);font-size:.76rem;color:var(--muted);margin-top:auto;}
