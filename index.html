@@ -5,7 +5,11 @@
 <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
 <meta name="description" content="오은비 포트폴리오 — 11년 차 영업지원·이커머스 온보딩 PM">
 <link rel="icon" href="data:image/svg+xml,%3Csvg%20xmlns%3D%22http%3A//www.w3.org/2000/svg%22%20viewBox%3D%220%200%2064%2064%22%3E%3Cdefs%3E%3ClinearGradient%20id%3D%22g%22%20x1%3D%220%22%20y1%3D%220%22%20x2%3D%221%22%20y2%3D%221%22%3E%3Cstop%20offset%3D%220%22%20stop-color%3D%22%230875D1%22/%3E%3Cstop%20offset%3D%221%22%20stop-color%3D%22%231088ED%22/%3E%3C/linearGradient%3E%3C/defs%3E%3Crect%20width%3D%2264%22%20height%3D%2264%22%20rx%3D%2214%22%20fill%3D%22url%28%2523g%29%22/%3E%3Ctext%20x%3D%2232%22%20y%3D%2244%22%20font-family%3D%22Arial%2C%20sans-serif%22%20font-size%3D%2234%22%20font-weight%3D%22700%22%20fill%3D%22%2523fff%22%20text-anchor%3D%22middle%22%3E%EC%9D%80%3C/text%3E%3C/svg%3E">
-<meta name="theme-color" content="#1088ED">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/pretendard@1.3.9/dist/web/variable/pretendardvariable-dynamic-subset.min.css">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@400;500;700;800;900&family=Archivo:wght@500;600;700;800;900&family=IBM+Plex+Mono:wght@400;500&display=swap" rel="stylesheet">
+<meta name="theme-color" content="#FBF8F2">
 <meta property="og:type" content="website">
 <meta property="og:title" content="오은비 · 문제를 발견하고, 더 나은 구조를 설계합니다">
 <meta property="og:description" content="오은비 포트폴리오 — 11년 차 영업지원·이커머스 온보딩 PM">
@@ -1115,6 +1119,441 @@ footer .sub{max-width:60ch;}
 @media (prefers-reduced-motion:reduce){
   .film-cta .thw::after,.film-cover .pb::after,.film-sound .eq i{animation:none;}
 }
+
+
+/* ═══════════════════════════════════════════════════════════════
+   색 위계 정리 (COLOR HIERARCHY)
+   파랑은 "성과"에만. 강조는 먹색(굵기)으로, 구조·이정표는 회색으로.
+   ─ 1단계 파랑 : 핵심 성과 숫자, 헤드라인의 핵심 구절, 수상
+   ─ 2단계 먹색 : 소제목, 본문 강조
+   ─ 3단계 회색 : 단계 번호, 머리말, 인용부호, 화살표, 보조 링크
+   ※ 클릭 가능한 요소(메뉴·버튼·호버)의 파랑은 '누를 수 있음'의 신호이므로 유지
+   ※ 회색 두 단계는 연한 파랑 배경 위에서도 WCAG AA를 통과하는 값으로 지정
+   ═══════════════════════════════════════════════════════════════ */
+:root{
+  --label:#68686F;   /* 작은 라벨용 — 연파랑 배경에서 4.9:1 */
+  --marker:#86868E;  /* 큰 장식 숫자용 — 큰 글씨 기준 3:1 통과 */
+}
+[data-theme="dark"]{
+  --label:#9FB3CC;
+  --marker:#7D93B3;
+}
+
+/* ── 2단계: 먹색으로 강등 ─────────────────────────────── */
+.block-label{color:var(--ink);}                 /* 소제목 라벨 (15곳) */
+.case .cdl .t{color:var(--ink);}                /* 사례 카드 항목명 */
+.xcell.after .xl{color:var(--ink);}             /* AFTER 라벨 */
+.path .seg.now{color:var(--ink);border-bottom-color:var(--line-strong);}
+
+/* ── 3단계: 회색으로 강등 ─────────────────────────────── */
+.eyebrow{color:var(--label);}                   /* 섹션 머리말 (6곳) */
+.step .sn{color:var(--label);}                  /* 단계 번호 (16곳 — 최다) */
+.fb .who .role{color:var(--label);}             /* 동료 역할 표기 */
+.proof-theme .pt-label .q{color:var(--label);}  /* 근거 번호 */
+.xarrow{color:var(--label);}                    /* BEFORE→AFTER 화살표 */
+.cap b{color:var(--label);font-weight:600;}     /* 역량 칩의 P01 참조 */
+nav.topbar .brand b{color:var(--label);}        /* 브랜드 보조 문구 */
+.act .res-tiles .rt .rt-no,
+.act .res-tiles .rt .no{color:var(--label);}    /* 성과 타일 번호 */
+.act-more-link{color:var(--label);border-bottom-color:var(--line-strong);}
+.act-more-link:hover{color:var(--accent);border-bottom-color:var(--accent-line);}
+.how-work .flow-no{color:var(--invert-muted);}  /* HOW I WORK 01~04 */
+
+/* 큰 장식 숫자·기호 */
+.act-code .no,
+.act-code .no b{color:var(--marker);}           /* P01~P04 섹션 표식 */
+.fb .qt{color:var(--marker);}                   /* 인용부호 */
+
+@media(max-width:760px){
+  .xarrow::before{color:var(--label);}
+}
+
+/* ── 1단계로 남는 파랑 (참고) ──────────────────────────
+   header.hero h1 .hl / .sec-head h2 .hl / footer h2 .hl / .vline .hl
+   .asset-hl .asset-quote .hl / .about-body .bio .hl   → 섹션별 핵심 주장
+   .act-hero-stat .big / .metric .val.word / .res-chip b → 성과 수치
+   .award-banner .medal                                  → 수상
+   ───────────────────────────────────────────────────── */
+
+
+
+/* ═══════════════════════════════════════════════════════════════
+   PRODUCT SKIN — 웹사이트 느낌
+   ① 밝고 서늘한 배경 + 흰 카드   ② 둥근 모서리   ③ 그림자로 층
+   ④ 라벨은 알약 배지            ⑤ 카드 호버 반응
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── ① 팔레트 ─────────────────────────────────────────── */
+:root{
+  --bg:#F5F8FC;
+  --bg-2:#EAF1FA;
+  --surface:#FFFFFF;
+  --surface-2:#F8FAFD;
+  --ink:#0F1B2D;
+  --ink-soft:#3C4A5E;
+  --muted:#64748B;
+  --faint:#93A1B4;
+  --line:#E3EAF3;
+  --line-strong:#CBD6E4;
+  --accent:#1B72DE;
+  --accent-2:#1B72DE;
+  --accent-deep:#135BB4;
+  --accent-soft:rgba(27,114,222,.09);
+  --accent-line:rgba(27,114,222,.26);
+  --accent-glow:rgba(27,114,222,.16);
+  --label:#5B6B80;
+  --marker:#AFBECF;
+  --radius:14px;
+  --radius-lg:22px;
+  --shadow-sm:0 1px 2px rgba(15,27,45,.04),0 6px 18px -8px rgba(15,27,45,.12);
+  --shadow-md:0 2px 5px rgba(15,27,45,.05),0 18px 38px -16px rgba(15,27,45,.20);
+  --invert-bg:#0E1C30;
+  --invert-surface:#17293F;
+  --invert-ink:#EDF3FA;
+  --invert-soft:#B6C6D9;
+  --invert-muted:#7E90A6;
+  --invert-line:rgba(237,243,250,.13);
+  --invert-accent:#6FA8EC;
+  --invert-accent-2:#8ABDF4;
+  --num:"Archivo","Helvetica Neue",Arial,sans-serif;
+  --cta-bg:#1B72DE;--cta-bg-hover:#135BB4;
+  --cta-bg-hi:#3A8BEE;--cta-bg-lo:#1055A8;--cta-shadow:rgba(19,91,180,.45);
+  --film-accent:#6FA8EC;
+}
+[data-theme="dark"]{
+  --bg:#0B1524;
+  --bg-2:#101E31;
+  --surface:#13223A;
+  --surface-2:#182B45;
+  --ink:#EDF3FA;
+  --ink-soft:#C3D1E2;
+  --muted:#8497AC;
+  --faint:#5A6C82;
+  --line:rgba(237,243,250,.10);
+  --line-strong:rgba(237,243,250,.19);
+  --accent:#5AA0F0;
+  --accent-2:#5AA0F0;
+  --accent-deep:#3E86DC;
+  --accent-soft:rgba(90,160,240,.14);
+  --accent-line:rgba(90,160,240,.32);
+  --label:#94A6BA;
+  --marker:#44586F;
+  --shadow-sm:0 1px 2px rgba(0,0,0,.3),0 8px 20px -10px rgba(0,0,0,.5);
+  --shadow-md:0 2px 5px rgba(0,0,0,.35),0 20px 40px -18px rgba(0,0,0,.6);
+  --invert-bg:#081120;
+  --invert-surface:#0E1C30;
+  --cta-bg:#1B72DE;--cta-bg-hover:#3A8BEE;
+  --cta-bg-hi:#3A8BEE;--cta-bg-lo:#1055A8;--cta-shadow:rgba(0,0,0,.55);
+}
+
+/* ── ② 머리말을 알약 배지로 ───────────────────────────── */
+.eyebrow{
+  display:inline-flex;align-items:center;align-self:flex-start;
+  padding:6px 13px;border-radius:100px;
+  background:var(--accent-soft);color:var(--accent);
+  font-size:.66rem;letter-spacing:.13em;font-weight:600;
+}
+.eyebrow.dim{background:var(--surface-2);color:var(--muted);}
+.how-work .eyebrow{background:rgba(237,243,250,.09);color:var(--invert-accent-2);}
+.sec-head h2::after{width:52px;height:3px;border-radius:2px;background:var(--accent);}
+
+/* ── ③ 지표 카드 ──────────────────────────────────────── */
+.metric-row{
+  grid-template-columns:repeat(4,minmax(0,1fr));
+  gap:14px;border:0;background:transparent;
+}
+.metric{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);padding:24px 22px 26px;min-height:0;
+  transition:transform .25s cubic-bezier(.2,.75,.25,1),box-shadow .25s;
+}
+.metric:not(:first-child){padding-left:22px;border-left:1px solid var(--line);}
+.metric:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
+.metric .val{color:var(--ink);}
+.metric .val.word{color:var(--accent);}
+.metric .lab{margin-top:12px;}
+.award-banner{
+  border:1px solid var(--accent-line);border-left:4px solid var(--accent);
+  border-radius:var(--radius);background:var(--accent-soft);
+  padding:18px 22px;margin-top:16px;
+}
+
+/* ── ④ 프로젝트 성과 타일 ─────────────────────────────── */
+.act .res-tiles{border:0;gap:14px;grid-template-columns:repeat(4,minmax(0,1fr));}
+.act .res-tiles .rt{
+  background:var(--surface);border:1px solid var(--line);border-right:1px solid var(--line);
+  border-radius:var(--radius);box-shadow:var(--shadow-sm);
+  padding:22px 20px 24px;min-height:0;
+  transition:transform .25s cubic-bezier(.2,.75,.25,1),box-shadow .25s;
+}
+.act .res-tiles .rt:last-child{border-right:1px solid var(--line);}
+.act .res-tiles .rt:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
+
+/* ── ⑤ 동료 피드백 카드 ───────────────────────────────── */
+.fb-grid{gap:16px;border:0;grid-template-columns:repeat(2,minmax(0,1fr));}
+.fb{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-sm);padding:28px 30px 26px;min-height:0;gap:14px;
+  transition:transform .25s cubic-bezier(.2,.75,.25,1),box-shadow .25s;
+}
+.fb:nth-child(even){padding-left:30px;border-left:1px solid var(--line);}
+.fb:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
+.fb .qt{font-size:2rem;line-height:1;height:auto;color:var(--accent);opacity:.3;margin-bottom:-10px;}
+.fb blockquote{font-size:1rem;line-height:1.75;color:var(--ink);font-weight:400;}
+.fb .who{
+  margin-top:auto;padding-top:16px;border-top:1px solid var(--line);
+  font-size:.78rem;color:var(--label);
+}
+
+/* ── ⑥ 사례·채널·비전 카드 ────────────────────────────── */
+.case,.ch,.vcard{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  box-shadow:var(--shadow-sm);padding:20px;
+  transition:transform .25s cubic-bezier(.2,.75,.25,1),box-shadow .25s;
+}
+.case:hover,.ch:hover,.vcard:hover{transform:translateY(-3px);box-shadow:var(--shadow-md);}
+.vcard{border-radius:var(--radius);border-top:3px solid var(--accent);border-image:none;}
+
+/* ── ⑦ BEFORE / AFTER 카드 ────────────────────────────── */
+.xform{gap:14px;grid-template-columns:minmax(0,1fr) auto minmax(0,1fr);}
+.xcell{border-radius:var(--radius);padding:22px 24px;box-shadow:var(--shadow-sm);}
+.xcell.before{background:var(--surface);border:1px solid var(--line);}
+.xcell.after{background:var(--accent-soft);border:1px solid var(--accent-line);}
+.xarrow{color:var(--accent);}
+@media(max-width:760px){
+  .xform{grid-template-columns:minmax(0,1fr);}
+  .xcell.before,.xcell.after{border-radius:var(--radius);}
+}
+
+/* ── ⑧ 단계 목록을 행 카드로 ──────────────────────────── */
+.steps{gap:10px;margin-top:16px;}
+.step{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:16px 20px;gap:16px;
+}
+.step:first-child{border-top:1px solid var(--line);}
+.step .sn{
+  color:#fff;background:var(--accent);border-radius:8px;
+  min-width:26px;height:26px;display:grid;place-items:center;
+  font-size:.76rem;font-weight:700;padding:0;
+}
+
+/* ── ⑨ 이미지·칩·링크 마감 ────────────────────────────── */
+.shot{
+  background:var(--surface);border:1px solid var(--line);border-radius:var(--radius);
+  padding:8px;box-shadow:var(--shadow-sm);overflow:hidden;
+}
+.shot img{border-radius:9px;}
+.thumb-strip img{border-radius:10px;border-color:var(--line);}
+.cap-txt{font-size:.8rem;color:var(--muted);margin-top:10px;}
+.cap{
+  background:var(--surface);border:1px solid var(--line);border-radius:100px;
+  padding:8px 14px;box-shadow:var(--shadow-sm);
+}
+.res-chip{
+  background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--accent);
+  border-radius:var(--radius);box-shadow:var(--shadow-sm);padding:12px 16px;
+}
+.block-label{
+  font-family:var(--kr);font-size:.84rem;font-weight:700;
+  letter-spacing:0;text-transform:none;color:var(--ink);margin-bottom:12px;
+}
+.act{border-top:1px solid var(--line);}
+.metric-row,.fb-grid{border-top:0;}
+
+/* ── ⑩ 어두운 섹션 안의 카드 ──────────────────────────── */
+.how-work .flow-item{
+  background:var(--invert-surface);border:1px solid var(--invert-line);
+  border-radius:var(--radius);padding:24px 22px 28px;min-height:0;
+}
+.work-flow{
+  display:grid;gap:14px;border:0;
+  grid-template-columns:repeat(4,minmax(0,1fr));
+}
+.how-work .flow-item:not(:first-child){border-left:1px solid var(--invert-line);padding-left:22px;}
+.how-work .flow-no{
+  color:#fff;background:var(--accent);border-radius:7px;
+  display:inline-grid;place-items:center;width:24px;height:24px;font-size:.68rem;font-weight:700;
+}
+.how-work .flow-item h3{margin-top:18px;}
+@media(max-width:900px){
+  .metric-row,.act .res-tiles,.work-flow{grid-template-columns:repeat(2,minmax(0,1fr));}
+}
+@media(max-width:760px){
+  .metric-row,.act .res-tiles,.work-flow,.fb-grid{grid-template-columns:minmax(0,1fr);}
+  .metric,.metric:not(:first-child),
+  .act .res-tiles .rt,
+  .fb,.fb:nth-child(even),
+  .how-work .flow-item,.how-work .flow-item:not(:first-child){
+    border-left:1px solid var(--line);padding-left:20px;padding-right:20px;
+  }
+  .how-work .flow-item,.how-work .flow-item:not(:first-child){border-left-color:var(--invert-line);}
+  .metric+.metric,.flow-item+.flow-item{border-top:1px solid var(--line);}
+  .how-work .flow-item+.flow-item{border-top-color:var(--invert-line);}
+}
+
+/* ── ⑪ 기타 ───────────────────────────────────────────── */
+.theme-toggle{border-radius:100px;background:var(--surface);border:1px solid var(--line);box-shadow:var(--shadow-sm);}
+footer{background:linear-gradient(0deg,var(--bg-2),var(--bg) 60%);}
+::selection{background:var(--accent);color:#fff;}
+
+/* ── ⑫ 마무리 보정 ────────────────────────────────────── */
+.eyebrow.dim{background:var(--surface);border:1px solid var(--line);color:var(--ink-soft);}
+@media(min-width:761px){
+  /* 지표 카드 네 개의 라벨이 같은 줄에서 시작하도록 */
+  .metric .val,.metric .val.word{
+    display:flex;align-items:flex-end;min-height:clamp(54px,6.2vw,84px);
+  }
+}
+.metric .val.word{
+  font-size:clamp(1.6rem,3.2vw,2.25rem);line-height:1.15;letter-spacing:-.03em;
+}
+
+/* ── ⑬ 명도 대비 보정 ─────────────────────────────────── */
+:root{--marker:#8896A8;}
+[data-theme="dark"]{--marker:#5A6C82;}
+.eyebrow{color:var(--accent-deep);background:rgba(27,114,222,.11);}
+[data-theme="dark"] .eyebrow{color:var(--accent);background:rgba(90,160,240,.16);}
+.xarrow{color:var(--accent-deep);}
+[data-theme="dark"] .xarrow{color:var(--accent);}
+
+:root{--marker:#77879C;}
+[data-theme="dark"]{--marker:#647689;}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   TYPE SYSTEM — 서체 정리
+   문제: 내비게이션·라벨·연락처·캡션이 전부 고정폭(코드용) 서체라
+         화면 전체가 "터미널에 친 글자"처럼 보였다.
+   해결: ① 한글은 Pretendard(웹 표준) ② 고정폭은 시간 표시에만 남김
+         ③ 과하게 벌어진 자간을 좁힘
+   ═══════════════════════════════════════════════════════════════ */
+:root{
+  --kr:"Pretendard Variable",Pretendard,"Noto Sans KR",-apple-system,
+       BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --ui:var(--kr);
+}
+body,h1,h2,h3,h4,p,blockquote,li,td,th,button,input,select,textarea{
+  font-family:var(--kr);
+}
+
+/* ── 고정폭을 걷어내고 본문 서체로 ────────────────────── */
+.eyebrow,
+nav.topbar .brand,
+nav.topbar .links,
+nav.topbar .links a,
+.scrollcue,
+footer .contact,
+.xcell .xl,
+.cap-txt,
+.act-more-link,
+.act-meta,
+.act-code .kicker,
+.film-meta,
+.film-cta .tx small,
+.pdfv-title,
+.pdfv-btn{
+  font-family:var(--ui);
+}
+
+/* ── 자간·굵기 재조정 (고정폭 시절의 넓은 자간을 좁힌다) ─ */
+.eyebrow{letter-spacing:.09em;font-weight:700;font-size:.68rem;}
+nav.topbar .brand{letter-spacing:.01em;font-weight:700;font-size:.8rem;}
+nav.topbar .links{letter-spacing:.01em;font-size:.82rem;}
+nav.topbar .links a{letter-spacing:.01em;font-weight:600;text-transform:none;}
+.scrollcue{letter-spacing:.09em;font-weight:600;font-size:.7rem;}
+footer .contact{letter-spacing:0;font-weight:600;font-size:.95rem;}
+.xcell .xl{letter-spacing:.09em;font-weight:700;font-size:.7rem;}
+.cap-txt{letter-spacing:0;font-size:.82rem;}
+.act-more-link{letter-spacing:0;font-weight:600;font-size:.8rem;}
+.act-meta{letter-spacing:0;font-size:.8rem;}
+.act-code .kicker{letter-spacing:0;font-size:.82rem;}
+.film-meta{letter-spacing:.06em;font-weight:600;}
+.film-cta .tx small{letter-spacing:.07em;font-weight:600;font-size:.68rem;}
+.pdf-link-tag{font-family:var(--ui);letter-spacing:0;font-weight:700;font-size:.76rem;}
+.fb .who{letter-spacing:0;}
+.block-label{letter-spacing:0;}
+
+/* ── 고정폭이 제 역할을 하는 곳만 남긴다 (시간·수치 표시) ─ */
+.film-bar .tm,
+.film-chapters .t,
+.pdfv-count{font-family:var(--mono);font-variant-numeric:tabular-nums;}
+
+/* ── 한글 본문 가독성 ──────────────────────────────────── */
+body{letter-spacing:-.011em;}
+h1,h2,h3,h4{letter-spacing:-.032em;}
+.lede,.saw,.act-role,.sec-head .desc,.fb blockquote,.step .stxt{letter-spacing:-.014em;}
+
+
+/* ═══════════════════════════════════════════════════════════════
+   PROJECT SECTION — 프로젝트 구간 다듬기
+   ① 수상처럼 '숫자가 아닌 성과'를 숫자 크기로 키우지 않는다
+   ② 상세 링크 배지가 제목에 달라붙지 않게 분리
+   ③ 검은 굵은 선 → 카드로 (아래 카드들과 언어를 맞춤)
+   ④ 소제목에 포인트 바
+   ═══════════════════════════════════════════════════════════════ */
+
+/* ── ① 성과 블록을 카드로, 글자형 성과는 적정 크기로 ──── */
+.act-hero-stat{
+  background:var(--surface);
+  border:1px solid var(--line);
+  border-bottom:1px solid var(--line);
+  border-radius:var(--radius-lg);
+  box-shadow:var(--shadow-sm);
+  padding:26px 30px 28px;
+  margin-block:34px 34px;
+  gap:14px 32px;
+  align-items:center;
+}
+.act-hero-stat .big{line-height:.9;}
+/* '최우수상' '적시 오픈'처럼 문장형 성과는 숫자와 다른 규격으로 */
+.act-hero-stat .big.word{
+  font-size:clamp(1.45rem,2.9vw,2.05rem);
+  line-height:1.25;
+  letter-spacing:-.03em;
+  color:var(--accent);
+  background:var(--accent-soft);
+  border:1px solid var(--accent-line);
+  border-radius:var(--radius);
+  padding:12px 20px;
+  align-self:flex-start;
+  white-space:nowrap;
+}
+.act-hero-stat .stat-cap{padding-bottom:0;}
+
+/* ── ② 상세 링크 배지를 제목 아래 줄로 ────────────────── */
+.act-title .pdf-link-tag{
+  display:flex;width:fit-content;
+  margin:16px 0 0;
+}
+
+/* ── ③ 소제목에 포인트 바 ─────────────────────────────── */
+.block-label{
+  position:relative;padding-left:13px;
+  font-size:.86rem;font-weight:700;color:var(--ink);
+}
+.block-label::before{
+  content:"";position:absolute;left:0;top:.28em;
+  width:3px;height:1em;border-radius:2px;background:var(--accent);
+}
+.how-work .block-label::before{background:var(--invert-accent);}
+
+/* ── ④ 남아 있던 굵은 검은 선 정리 ────────────────────── */
+.fb-grid,.metric-row,.act .res-tiles{border-top:0;border-bottom:0;}
+.asset-hl{border-top:1px solid var(--line);padding-top:30px;}
+.subact{border-top:1px solid var(--line);}
+
+@media(max-width:760px){
+  .act-hero-stat{padding:22px 20px 24px;gap:14px;}
+  .act-hero-stat .big.word{white-space:normal;}
+}
+
+/* 결과 칩 — 왼쪽 굵은 선이 둥근 모서리에서 휘어 보이던 것을 정리 */
+.res-chip{
+  background:var(--accent-soft);border:1px solid var(--accent-line);
+  border-left-width:1px;border-radius:100px;padding:10px 18px;
+  box-shadow:none;font-size:.88rem;
+}
 </style>
 </head>
 <body>
@@ -1303,7 +1742,7 @@ footer .sub{max-width:60ch;}
       </div>
 
       <div class="block-label">내가 먼저 본 것</div>
-      <p class="saw">카페24·고도몰 등 플랫폼마다 이관 방식이 제각각이라 <b>매뉴얼조차 없었고</b>, 노하우는 담당자 개인의 기억과 메신저 기록에만 흩어져 있었습니다.</p>
+      <p class="saw">카*·고도* 등 플랫폼마다 이관 방식이 제각각이라 <b>매뉴얼조차 없었고</b>, 노하우는 담당자 개인의 기억과 메신저 기록에만 흩어져 있었습니다.</p>
 
       <div class="xform">
         <div class="xcell before"><span class="xl">Before</span><span class="xt">플랫폼별 제각각 · 담당자 개인 노하우에만 의존</span></div>
