@@ -1088,6 +1088,11 @@ footer .sub{max-width:60ch;}
 .film-after a,.film-after button{display:inline-flex;align-items:center;gap:5px;padding:8px 12px;border-radius:100px;font-family:var(--kr);font-size:.76rem;white-space:nowrap;font-weight:700;cursor:pointer;border:1px solid rgba(255,255,255,.3);background:rgba(255,255,255,.08);color:#fff;}
 .film-after a.pri{background:#fff;color:#0A2A4F;border-color:#fff;}
 .film-stage:fullscreen{border-radius:0;}
+/* 전체화면: 무대가 화면 전체로 늘어나므로 영상은 잘리지 않게 '맞춤(contain)'으로.
+   (cover였을 때 세로 폰에서는 좌우가, 가로 폰에서는 위아래가 잘려 화면이 안 맞았음) */
+.film-stage:fullscreen,.film-stage:-webkit-full-screen{aspect-ratio:auto;width:100%;height:100%;max-width:none;border-radius:0;background:#000;box-shadow:none;}
+.film-stage:fullscreen video,.film-stage:-webkit-full-screen video{object-fit:contain;background:#000;}
+.film-stage:fullscreen .film-bar,.film-stage:-webkit-full-screen .film-bar{padding-bottom:max(12px,env(safe-area-inset-bottom,0px));}
 
 /* chapters */
 .film-chapters{display:flex;gap:6px;margin-top:18px;}
@@ -2409,7 +2414,11 @@ dlBtn.addEventListener('click',function(){
 
   // 화면 비율에 맞는 영상 선택: 데스크톱 16:9 · 모바일 4:5
   var mq=null;try{mq=window.matchMedia('(max-width:640px)');}catch(e){}
-  function kind(){return mq&&mq.matches?'tall':'wide';}
+  function isFs(){return !!(document.fullscreenElement||document.webkitFullscreenElement);}
+  function kind(){
+    if(isFs()) return (window.innerWidth>window.innerHeight)?'wide':'tall';
+    return mq&&mq.matches?'tall':'wide';
+  }
   var urls={};
   function urlFor(k){
     if(urls[k]) return urls[k];
@@ -2442,6 +2451,10 @@ dlBtn.addEventListener('click',function(){
     v.addEventListener('loadedmetadata',function(){try{v.currentTime=t;}catch(e){} if(was)v.play().catch(function(){});},{once:true});
   }
   if(mq){if(mq.addEventListener)mq.addEventListener('change',onBreakpoint);else if(mq.addListener)mq.addListener(onBreakpoint);}
+  // 전체화면 진입/해제·화면 회전 시 방향에 맞는 영상으로 교체
+  document.addEventListener('fullscreenchange',onBreakpoint);
+  document.addEventListener('webkitfullscreenchange',onBreakpoint);
+  window.addEventListener('resize',function(){if(isFs())onBreakpoint();});
 
   function setMode(m){
     mode=m;
@@ -2502,8 +2515,11 @@ dlBtn.addEventListener('click',function(){
   fullBtn.addEventListener('click',function(e){
     e.stopPropagation();
     try{
-      if(document.fullscreenElement){document.exitFullscreen();}
-      else if(stage.requestFullscreen){stage.requestFullscreen();}
+      if(document.fullscreenElement||document.webkitFullscreenElement){
+        (document.exitFullscreen||document.webkitExitFullscreen).call(document);
+      }
+      else if(stage.requestFullscreen){stage.requestFullscreen({navigationUI:'hide'}).catch(function(){ if(v.webkitEnterFullscreen)v.webkitEnterFullscreen(); });}
+      else if(stage.webkitRequestFullscreen){stage.webkitRequestFullscreen();}
       else if(v.webkitEnterFullscreen){v.webkitEnterFullscreen();}
     }catch(err){}
   });
